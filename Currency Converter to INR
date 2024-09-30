@@ -1,0 +1,44 @@
+#include <iostream>
+#include <unordered_map>
+#include <string>
+using namespace std;
+
+float getExchangeRate(const string &currency) {
+    // Predefined exchange rates (example rates, please update with real-time rates)
+    unordered_map<string, float> rates = {
+        {"United States Dollar", 83.50},  // USD to INR
+        {"Euro", 90.00},                   // EUR to INR
+        {"Japanese Yen", 0.55},            // JPY to INR
+        {"British Pound", 105.00},         // GBP to INR
+        {"Australian Dollar", 55.50},      // AUD to INR
+        {"Canadian Dollar", 60.00},        // CAD to INR
+        {"Swiss Franc", 92.00},            // CHF to INR
+        {"Chinese Yuan", 12.00},           // CNY to INR
+        {"Singapore Dollar", 62.00}        // SGD to INR
+        // Add more currencies and their rates as needed
+    };
+
+    auto it = rates.find(currency);
+    return (it != rates.end()) ? it->second : -1; // Return rate or -1 if not found
+}
+
+int main() {
+    string currency;
+    float amount, inr;
+
+    cout << "Enter the name of the currency (e.g., 'United States Dollar'): ";
+    cin>>currency;
+    
+    cout << "Enter amount in " << currency << ": ";
+    cin >> amount;
+
+    float rate = getExchangeRate(currency);
+    if (rate < 0) {
+        cout << "Currency not recognized.\n";
+    } else {
+        inr = amount * rate;
+        cout << amount << " " << currency << " is equivalent to " << inr << " INR\n";
+    }
+
+    return 0;
+}
